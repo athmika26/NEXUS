@@ -1,0 +1,22 @@
+<%- include('layout') %>
+<div class="main-content">
+    <div class="header">
+        <button id="menu-toggle">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                <path d="M4 18h16v-2H4v2zm0-5h16v-2H4v2zm0-7v2h16V6H4z"></path>
+            </svg>
+        </button>
+        <input type="text" placeholder="Search">
+    </div>
+    <div class="note-input">
+        <form action="/notes/edit/<%= note._id %>" method="POST">
+            <input type="text" name="title" value="<%= note.title %>" required>
+            <textarea name="content" required><%= note.content %></textarea>
+            <div class="note-actions">
+                <button type="submit">
+                    Update Note
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
