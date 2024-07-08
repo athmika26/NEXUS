@@ -17,14 +17,14 @@ router.get('/', async (req, res) => {
 router.post('/add', async (req, res) => {
     const { title, content } = req.body;
     await Note.create({ title, content });
-    res.redirect('/');
+    res.redirect('/home');
 });
 
 // Delete a note
 router.post('/delete/:id', async (req, res) => {
     const { id } = req.params;
     await Note.findByIdAndDelete(id);
-    res.redirect('/');
+    res.redirect('/home');
 });
 
 // Edit a note (Get note data)
@@ -39,7 +39,7 @@ router.post('/edit/:id', async (req, res) => {
     const { id } = req.params;
     const { title, content } = req.body;
     await Note.findByIdAndUpdate(id, { title, content });
-    res.redirect('/');
+    res.redirect('/home');
 });
 
 module.exports = router;

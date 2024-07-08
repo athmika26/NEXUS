@@ -25,9 +25,9 @@ app.get("/login", (req, res) => {
     res.render("login"); 
 });
 
-app.get("/home", (req, res) => {
-    res.render("home"); 
-});
+// app.get("/home", (req, res) => {
+//     res.render("home"); 
+// });
 app.use("/auth",authRoutes);
-app.use("/notes",notesRouter);
+app.use("/home",notesRouter);
 app.listen(port, () => console.log(`Server is running on port ${port}`));
