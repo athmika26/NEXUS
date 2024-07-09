@@ -13,7 +13,7 @@ body {
 /* Sidebar styles */
 .sidebar {
   width: 60px;
-  background-color: #fff;
+  background: linear-gradient(45deg, #3b8d99, #6b6b83, #aa4b6b);
   padding: 0;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
   position: fixed;
@@ -34,7 +34,7 @@ body {
   justify-content: center;
   font-size: 24px;
   font-weight: bold;
-  color: #08a0e9;
+  color: #fff;
   margin: 20px auto;
   text-align: center;
   transition: opacity 0.3s ease, width 0.3s ease;
@@ -65,7 +65,7 @@ body {
 
 .sidebar ul li a {
   text-decoration: none;
-  color: #202124;
+  color: #fff;
   display: flex;
   align-items: center;
   padding: 10px 15px;
@@ -75,7 +75,7 @@ body {
 
 .sidebar ul li.active a,
 .sidebar ul li a:hover {
-  background-color: #e8eaed;
+  background-color: rgba(255, 255, 255, 0.2);
 }
 
 .sidebar ul li a svg {
@@ -131,41 +131,66 @@ body {
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 18.8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
-
 .note-input {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
   margin-bottom: 20px;
-  margin-left: 35px;
-  margin-right: 35px;
-  background-color: #fff;
-  padding: 10px;
+  padding: 20px;
   border-radius: 20px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.note-input input[type="text"] {
-  flex-grow: 1;
-  padding: 10px;
+.note-input:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.note-input input[type="text"],
+.note-input textarea {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
   border: none;
-  outline: none;
+  border-radius: 8px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
   font-size: 16px;
+  outline: none;
+}
+
+.note-input input[type="text"]::placeholder,
+.note-input textarea::placeholder {
+  color: #999;
+}
+
+.note-input textarea {
+  min-height: 120px;
+  resize: none;
+}
+
+.note-actions {
+  align-self: flex-end;
 }
 
 .note-actions button {
+  background-color: #4caf50;
+  color: #fff;
   border: none;
-  background: none;
+  padding: 12px 20px;
+  font-size: 16px;
   cursor: pointer;
-  font-size: 18px;
-  color: #5f6368;
-  margin-left: 10px;
-  transition: color 0.3s ease;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
 }
 
 .note-actions button:hover {
-  color: #202124;
+  background-color: #3e8e41;
 }
+
 
 .notes {
   text-align: center;
@@ -176,13 +201,11 @@ body {
   font-size: 18px;
 }
 
-/* Adjust main content margin when sidebar is open */
 .sidebar.open ~ .main-content {
   margin-left: 250px;
   width: calc(100% - 250px);
 }
 
-/* Menu button styles */
 .menu-button {
   border-radius: 50%;
   display: inline-block;
@@ -199,20 +222,26 @@ body {
   opacity: 1;
 }
 
-/* styles.css */
-
+/* Note box styles */
 .note-box {
-  background-color: #f7f7f7;
+  background: linear-gradient(135deg, #fdfbfb, #ebedee);
   padding: 20px;
   margin-bottom: 20px;
   border: 1px solid #ddd;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.note-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
 }
 
 .note-box h2 {
   font-weight: bold;
   margin-top: 0;
+  color: #333;
 }
 
 .note-actions {
@@ -228,6 +257,8 @@ body {
   padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
 }
 
 .note-actions button:hover {
@@ -242,12 +273,15 @@ body {
   font-size: 16px;
   cursor: pointer;
   margin-bottom: 20px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
 }
 
 .add-btn:hover {
   background-color: #3e8e41;
 }
 
+/* Modal styles */
 .modal {
   display: none;
   position: fixed;
@@ -258,7 +292,6 @@ body {
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: rgb(0, 0, 0);
   background-color: rgba(0, 0, 0, 0.4);
 }
 
@@ -268,6 +301,8 @@ body {
   padding: 20px;
   border: 1px solid #888;
   width: 80%;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
 .modal-content h2 {
@@ -284,6 +319,7 @@ body {
   padding: 10px;
   margin-bottom: 20px;
   border: 1px solid #ccc;
+  border-radius: 5px;
 }
 
 .modal-content button[type="submit"] {
@@ -293,6 +329,8 @@ body {
   padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
 }
 
 .modal-content button[type="submit"]:hover {

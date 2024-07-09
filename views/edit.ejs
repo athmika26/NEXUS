@@ -1,4 +1,5 @@
-<%- include('layout') %>
+<%- include('layout', { title: 'Edit Note' }) %>
+
 <div class="main-content">
     <div class="header">
         <button id="menu-toggle">
@@ -8,15 +9,9 @@
         </button>
         <input type="text" placeholder="Search">
     </div>
-    <div class="note-input">
-        <form action="/notes/edit/<%= note._id %>" method="POST">
-            <input type="text" name="title" value="<%= note.title %>" required>
-            <textarea name="content" required><%= note.content %></textarea>
-            <div class="note-actions">
-                <button type="submit">
-                    Update Note
-                </button>
-            </div>
-        </form>
-    </div>
+    <form action="/home/edit/<%= note._id %>" method="post">
+        <input type="text" name="title" value="<%= note.title %>" placeholder="Title">
+        <textarea name="content" placeholder="Content"><%= note.content %></textarea>
+        <button type="submit">Save Changes</button>
+    </form>
 </div>
