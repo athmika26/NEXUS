@@ -5,7 +5,7 @@ const Note = require('../models/note');
 // Get all notes
 router.get('/', async (req, res) => {
     try {
-        const notes = await Note.find({ isArchived: false }).sort({ createdAt: -1 });
+        const notes = await Note.find({ isArchived: false, user: req.user._id }).sort({ createdAt: -1 });
         res.render('home', { notes }); // Assuming your EJS file is named home.ejs
     } catch (err) {
         console.error(err);
@@ -16,7 +16,7 @@ router.get('/', async (req, res) => {
 // Get archived notes
 router.get('/archive', async (req, res) => {
     try {
-        const notes = await Note.find({ isArchived: true }).sort({ createdAt: -1 });
+        const notes = await Note.find({ isArchived: true, user: req.user._id }).sort({ createdAt: -1 });
         res.render('home', { notes }); // Assuming your EJS file is named home.ejs
     } catch (err) {
         console.error(err);
@@ -29,8 +29,8 @@ router.post('/:id/archive', async (req, res) => {
     try {
         console.log(req.params.id);
         const note = await Note.findById(req.params.id);
-        if (!note) {
-            return res.status(404).send('Note not found');
+        if (!note || note.user.toString() !== req.user._id.toString()) {
+            return res.status(404).send('Note not found or unauthorized');
         }
         note.isArchived = true;
         await note.save();
@@ -44,15 +44,30 @@ router.post('/:id/archive', async (req, res) => {
 // Create a new note
 router.post('/add', async (req, res) => {
     const { title, content } = req.body;
-    await Note.create({ title, content });
-    res.redirect('/home');
+    const user = req.user._id;
+    try {
+        await Note.create({ title, content, user });
+        res.redirect('/home');
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Server Error');
+    }
 });
 
 // Delete a note
 router.post('/delete/:id', async (req, res) => {
     const { id } = req.params;
-    await Note.findByIdAndDelete(id);
-    res.redirect('/home');
+    try {
+        const note = await Note.findById(id);
+        if (!note || note.user.toString() !== req.user._id.toString()) {
+            return res.status(404).send('Note not found or unauthorized');
+        }
+        await Note.findByIdAndDelete(id);
+        res.redirect('/home');
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Server Error');
+    }
 });
 
 // Edit a note (Get note data)
@@ -61,24 +76,9 @@ router.get('/edit/:id', async (req, res) => {
     try {
         console.log(`Editing note ID: ${id}`);
         const note = await Note.findById(id);
-        if (!note) {
-            console.error(`Note with ID ${id} not found`);
-            return res.status(404).send('Note not found');
-        }
-        res.render('edit', { title: 'Edit Note', note: note});
-    } catch (err) {
-        console.error(`Error fetching note with ID ${id}:`, err);
-        res.status(500).send('Server Error');
-    }
-});
-router.get('/edit/:id', async (req, res) => {
-    const { id } = req.params;
-    try {
-        console.log(`Editing note ID: ${id}`);
-        const note = await Note.findById(id);
-        if (!note) {
-            console.error(`Note with ID ${id} not found`);
-            return res.status(404).send('Note not found');
+        if (!note || note.user.toString() !== req.user._id.toString()) {
+            console.error(`Note with ID ${id} not found or unauthorized`);
+            return res.status(404).send('Note not found or unauthorized');
         }
         console.log('Note found:', note); // Debug log
         res.render('edit', { title: 'Edit Note', note: note });
@@ -88,14 +88,18 @@ router.get('/edit/:id', async (req, res) => {
     }
 });
 
-
-
 // Update a note
 router.post('/edit/:id', async (req, res) => {
     const { id } = req.params;
     const { title, content } = req.body;
     try {
-        await Note.findByIdAndUpdate(id, { title, content });
+        const note = await Note.findById(id);
+        if (!note || note.user.toString() !== req.user._id.toString()) {
+            return res.status(404).send('Note not found or unauthorized');
+        }
+        note.title = title;
+        note.content = content;
+        await note.save();
         res.redirect('/home');
     } catch (err) {
         console.error(err);

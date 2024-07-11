@@ -55,7 +55,7 @@
             <span>Archive</span>
           </a>
         </li>
-        <li>
+        <!-- <li>
           <a href="#">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
               <path d="M15 4V3H9v1H4v2h1v13c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V6h1V4h-5zm2 15H7V6h10v13z"></path>
@@ -63,7 +63,7 @@
             </svg>
             <span>Trash</span>
           </a>
-        </li>
+        </li> -->
       </ul>
     </div>
     <div class="main-content">
@@ -73,7 +73,7 @@
             <path d="M4 18h16v-2H4v2zm0-5h16v-2H4v2zm0-7v2h16V6H4z"></path>
           </svg>
         </button>
-        <input type="text" placeholder="Search">
+        <input type="text" id="search-input" placeholder="Search" oninput="handleSearch(this.value)">
       </div>
       <div class="note-input">
         <input type="text" id="add-title" placeholder="Take a note...">
@@ -112,7 +112,17 @@
     </div>
 
     <script src="/js/Home_page.js"></script>
+
+    <script>
+      function handleSearch(query) {
+        // This function should handle your search logic
+        // For demonstration purposes, console log the query
+        console.log("Search Query:", query);
+        
+        // You would typically fetch or filter notes based on 'query' and update the UI
+        // Replace this with your actual logic to update the notes list based on search
+      }
+    </script>
 </body>
 
 </html>
-
