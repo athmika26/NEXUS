@@ -3,6 +3,14 @@ document.addEventListener("DOMContentLoaded", function () {
     const menuToggle = document.getElementById("menu-toggle");
     const searchInput = document.getElementById("search-input");
     const noteBoxes = document.querySelectorAll('.note-box');
+    const addBtn = document.querySelector('.add-btn');
+    const editBtns = document.querySelectorAll('.edit-btn');
+    const deleteBtns = document.querySelectorAll('.delete-btn');
+    const archiveButtons = document.querySelectorAll('.archive-btn');
+    const editModal = document.getElementById('edit-note-modal');
+    const editForm = editModal.querySelector('form');
+    const editTitle = editModal.querySelector('#edit-title');
+    const editContent = editModal.querySelector('#edit-content');
 
     menuToggle.addEventListener("click", function () {
         sidebar.classList.toggle("open");
@@ -25,12 +33,6 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
     }
-
-});
-
-    const addBtn = document.querySelector('.add-btn');
-    const editBtns = document.querySelectorAll('.edit-btn');
-    const deleteBtns = document.querySelectorAll('.delete-btn');
 
     addBtn.addEventListener('click', async () => {
         const title = document.querySelector('#add-title').value;
@@ -65,14 +67,13 @@ document.addEventListener("DOMContentLoaded", function () {
                     if (contentType && contentType.indexOf('application/json') !== -1) {
                         const note = await response.json();
                         console.log('Fetched note data:', note); // Debug
-                        const editModal = document.querySelector('#edit-note-modal');
-                        editModal.querySelector('#edit-title').value = note.title;
-                        editModal.querySelector('#edit-content').value = note.content;
+                        editTitle.value = note.title;
+                        editContent.value = note.content;
                         editModal.style.display = 'block';
-                        editModal.querySelector('form').addEventListener('submit', async (e) => {
+                        editForm.onsubmit = async (e) => {
                             e.preventDefault();
-                            const updatedTitle = editModal.querySelector('#edit-title').value;
-                            const updatedContent = editModal.querySelector('#edit-content').value;
+                            const updatedTitle = editTitle.value;
+                            const updatedContent = editContent.value;
                             try {
                                 const updateResponse = await fetch(`/home/edit/${noteId}`, {
                                     method: 'POST',
@@ -87,7 +88,7 @@ document.addEventListener("DOMContentLoaded", function () {
                             } catch (err) {
                                 console.error(err);
                             }
-                        });
+                        };
                     } else {
                         const html = await response.text();
                         document.open();
@@ -122,7 +123,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    const archiveButtons = document.querySelectorAll('.archive-btn');
     archiveButtons.forEach(button => {
         button.addEventListener('click', (event) => {
             const noteId = event.target.dataset.noteId;
@@ -152,7 +152,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // Search functionality
-    searchInput.addEventListener('input', function() {
+    searchInput.addEventListener('input', function () {
         const query = searchInput.value.toLowerCase();
         noteBoxes.forEach(noteBox => {
             const title = noteBox.querySelector('h2').textContent.toLowerCase();
@@ -164,3 +164,4 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
     });
+});

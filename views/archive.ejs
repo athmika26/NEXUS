@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nexus</title>
+  <title>Nexus - Archive</title>
   <link rel="stylesheet" href="/css/Home_page.css">
 </head>
 
@@ -15,7 +15,7 @@
         <span><i>Nexus</i></span>
       </div>
       <ul>
-        <li class="active">
+        <li>
           <a href="/home">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
               <path
@@ -45,7 +45,7 @@
             <span>Edit Notes</span>
           </a>
         </li>
-        <li>
+        <li class="active">
           <a href="/home/archive">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
               <path
@@ -55,15 +55,6 @@
             <span>Archive</span>
           </a>
         </li>
-        <!-- <li>
-          <a href="#">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-              <path d="M15 4V3H9v1H4v2h1v13c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V6h1V4h-5zm2 15H7V6h10v13z"></path>
-              <path d="M9 8h2v9H9zm4 0h2v9h-2z"></path>
-            </svg>
-            <span>Trash</span>
-          </a>
-        </li> -->
       </ul>
     </div>
     <div class="main-content">
@@ -75,15 +66,8 @@
         </button>
         <input type="text" id="search-input" placeholder="Search" oninput="handleSearch(this.value)">
       </div>
-      <div class="note-input">
-        <input type="text" id="add-title" placeholder="Take a note...">
-        <textarea id="add-content" placeholder="Content"></textarea>
-        <div class="note-actions">
-          <button class="add-btn">Add New Note</button>
-        </div>
-      </div>
       <div class="notes">
-        <p>Notes you add appear here</p>
+        <p>Archived notes appear here</p>
         <div class="notes-list">
           <% notes.forEach(note => { %>
           <div class="note-box" data-note-id="<%= note._id %>">
@@ -91,33 +75,24 @@
             <p><%= note.content %></p>
             <div class="note-actions">
               <button class="edit-btn" data-note-id="<%= note._id %>">Edit</button>
-              <button class="delete-btn" data-note-id="<%= note._id %>">Delete</button>
-              <button class="archive-btn" data-note-id="<%= note._id %>">Archive</button>
+              <button class="unarchive-btn" data-note-id="<%= note._id %>">Unarchive</button>
             </div>
           </div>
           <% }); %>
         </div>
       </div>
-      <!-- Add new note button -->
-
       <!-- Modal for editing note -->
-      <div id="edit-note-modal" class="modal">
-        <div class="modal-content">
-          <span class="close">&times;</span>
-          <form>
-            <label for="edit-title">Title</label>
-            <textarea id="edit-title" name="edit-title"></textarea>
-            <label for="edit-content">Content</label>
-            <textarea id="edit-content" name="edit-content"></textarea>
-            <button type="submit">Save</button>
-          </form>
-        </div>
+      <div id="edit-note-modal" style="display:none;">
+        <form>
+          <input type="text" id="edit-title" placeholder="Title">
+          <textarea id="edit-content" placeholder="Content"></textarea>
+          <button type="submit">Save Changes</button>
+        </form>
       </div>
-    </div>
 
     </div>
 
-    <script src="/js/Home_page.js"></script>
+    <script src="/js/Archive.js"></script>
 
     <script>
       function handleSearch(query) {

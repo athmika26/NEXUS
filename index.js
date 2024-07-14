@@ -5,12 +5,14 @@ const mongoose = require('mongoose');
 const authRoutes = require('./routes/auth');
 const notesRouter = require('./routes/notes');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 
 const app = express();
 const port = 3000;
 const mongoURI = process.env.MONGOURL;
 
 app.set('view engine', 'ejs');
+app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json()); // This line was added to support JSON-encoded bodies
 app.use(express.static(path.join(__dirname, 'public')));
