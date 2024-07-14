@@ -336,3 +336,25 @@ body {
 .modal-content button[type="submit"]:hover {
   background-color: #3e8e41;
 }
+/* .spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.spinner {
+  width: 300px;
+  height: 300px;
+  transform-origin: center;
+  animation: spin 5s infinite cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+} */

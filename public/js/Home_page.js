@@ -11,6 +11,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const editForm = editModal.querySelector('form');
     const editTitle = editModal.querySelector('#edit-title');
     const editContent = editModal.querySelector('#edit-content');
+    const spinner = document.getElementById('spinner');
+    const spinButton = document.getElementById('spin-button');
+    const resultText = document.getElementById('result-text');
+    const resultDiv = document.getElementById('result');
+
 
     menuToggle.addEventListener("click", function () {
         sidebar.classList.toggle("open");
@@ -164,4 +169,28 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
     });
+
+  spinButton.addEventListener('click', function () {
+    // Disable the button temporarily to prevent multiple spins
+    spinButton.disabled = true;
+
+    // Simulate a random spin result
+    const sectors = ["Sector 1", "Sector 2", "Sector 3", "Sector 4", "Sector 5"];
+    const randomIndex = Math.floor(Math.random() * sectors.length);
+    const randomSector = sectors[randomIndex];
+
+    // Rotate the spinner
+    spinner.style.animation = 'none';
+    setTimeout(function () {
+      spinner.style.animation = 'spin 4s linear infinite';
+    }, 100);
+
+    // Show result after delay
+    setTimeout(function () {
+      resultText.textContent = `You landed on: ${randomSector}`;
+      resultDiv.classList.add('show');
+      spinButton.disabled = false;
+    }, 4000); // Adjust time as per your animation duration
+  });
 });
+

@@ -115,5 +115,9 @@ router.post('/delete/:id', authenticateJWT, async (req, res) => {
     res.status(500).send('Server Error');
   }
 });
+router.get('/wheel', function (req, res) {
+  res.render('spinning_wheel');
+});
+
 
 module.exports = router;
