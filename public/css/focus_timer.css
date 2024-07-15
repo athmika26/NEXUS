@@ -1,0 +1,58 @@
+/* public/styles/focus_timer.css */
+
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f0f0f0; /* Background color for the entire page */
+}
+
+.timer-container {
+    text-align: center;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+#timer-display {
+    font-size: 2em;
+    margin-top: 20px;
+    background-color: #ffffff; /* Background color for the timer display */
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Box shadow for a subtle effect */
+}
+
+input[type="number"],
+button {
+    font-size: 1em;
+    padding: 10px;
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff; /* Button background color */
+    color: #ffffff; /* Button text color */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+input[type="number"]:focus,
+button:focus {
+    outline: none;
+}
+
+button:hover {
+    background-color: #0056b3; /* Button background color on hover */
+}
+
+input[type="number"] {
+    width: 80px; /* Adjust width as needed */
+}
+
+button {
+    min-width: 100px; /* Adjust minimum width as needed */
+}

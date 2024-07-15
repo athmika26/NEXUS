@@ -118,6 +118,104 @@ router.post('/delete/:id', authenticateJWT, async (req, res) => {
 router.get('/wheel', function (req, res) {
   res.render('spinning_wheel');
 });
+router.get('/home/matrix', async (req, res) => {
+  const urgentImportantNotes = await Note.find({ category: 'urgent-important' });
+  const notUrgentImportantNotes = await Note.find({ category: 'not-urgent-important' });
+  const urgentNotImportantNotes = await Note.find({ category: 'urgent-not-important' });
+  const notUrgentNotImportantNotes = await Note.find({ category: 'not-urgent-not-important' });
+  res.render('eisenhower_matrix', { urgentImportantNotes, notUrgentImportantNotes, urgentNotImportantNotes, notUrgentNotImportantNotes });
+});
 
+router.post('/add-note', async (req, res) => {
+  const { category, content } = req.body;
+  const newNote = new Note({
+      category,
+      content
+  });
+  await newNote.save();
+  res.json(newNote);
+});
 
+router.delete('/delete-note/:id', async (req, res) => {
+  const { id } = req.params;
+  await Note.findByIdAndDelete(id);
+  res.sendStatus(200);
+});
+router.get('/matrix', authenticateJWT, async (req, res) => {
+  try {
+      const userId = req.user.id;
+      const urgentImportantNotes = await Note.find({ category: 'urgent-important', user: userId });
+      const notUrgentImportantNotes = await Note.find({ category: 'not-urgent-important', user: userId });
+      const urgentNotImportantNotes = await Note.find({ category: 'urgent-not-important', user: userId });
+      const notUrgentNotImportantNotes = await Note.find({ category: 'not-urgent-not-important', user: userId });
+      res.render('eisenhower_matrix', { urgentImportantNotes, notUrgentImportantNotes, urgentNotImportantNotes, notUrgentNotImportantNotes });
+  } catch (err) {
+      console.error(err);
+      res.status(500).send('Server Error');
+  }
+});
+
+// Add a note to the Eisenhower Matrix
+router.post('/matrix/add', authenticateJWT, async (req, res) => {
+  const { category, content } = req.body;
+  const userId = req.user.id;
+  try {
+      const newNote = new Note({
+          category,
+          content,
+          user: userId
+      });
+      await newNote.save();
+      res.json(newNote);
+  } catch (err) {
+      console.error(err);
+      res.status(500).send('Server Error');
+  }
+});
+
+// Delete a note from the Eisenhower Matrix
+router.delete('/matrix/delete/:id', authenticateJWT, async (req, res) => {
+  try {
+      const noteId = req.params.id;
+      const note = await Note.findById(noteId);
+      if (!note || note.user.toString() !== req.user.id.toString()) {
+          return res.status(404).send('Note not found or unauthorized');
+      }
+      await Note.findByIdAndDelete(noteId);
+      res.sendStatus(200);
+  } catch (err) {
+      console.error(err);
+      res.status(500).send('Server Error');
+  }
+});
+// Route to serve the voice note-taking page
+router.get('/voice', authenticateJWT, (req, res) => {
+  res.render('voice', { user: req.user });
+});
+
+// Route to add a new note
+router.post('/add', authenticateJWT, async (req, res) => {
+  const { content } = req.body;
+  const userId = req.user.id;
+  try {
+      const newNote = new Note({
+          content,
+          user: userId,
+      });
+      await newNote.save();
+      res.json(newNote);
+  } catch (err) {
+      console.error(err);
+      res.status(500).send('Server Error');
+  }
+
+  router.get('/focus_timer', (req, res) => {
+    res.render('focus_timer');
+});
+
+// Route to render the Focus Timer page
+router.get('/focus_timer', (req, res) => {
+  res.render('focus_timer'); // Ensure 'focus_timer' is your correct EJS file name
+});
+});
 module.exports = router;

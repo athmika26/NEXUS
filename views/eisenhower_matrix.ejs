@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eisenhower Matrix</title>
+    <link rel="stylesheet" href="/css/eisenhower_matrix.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Eisenhower Matrix</h1>
+            <p class="motivation-phrase">Prioritize and conquer!</p>
+        </div>
+        <div class="matrix">
+            <div class="box urgent-important">
+                <h2>Urgent & Important</h2>
+                <div class="notes-list" id="urgent-important-notes">
+                    <% urgentImportantNotes.forEach(note => { %>
+                    <div class="note-box" data-note-id="<%= note._id %>">
+                        <p><%= note.content %></p>
+                        <button class="delete-btn" data-note-id="<%= note._id %>">Delete</button>
+                    </div>
+                    <% }); %>
+                </div>
+                <textarea id="urgent-important-input" placeholder="Add a note..."></textarea>
+                <button class="add-btn" onclick="addNote('urgent-important')">Add Note</button>
+            </div>
+            <div class="box not-urgent-important">
+                <h2>Not Urgent & Important</h2>
+                <div class="notes-list" id="not-urgent-important-notes">
+                    <% notUrgentImportantNotes.forEach(note => { %>
+                    <div class="note-box" data-note-id="<%= note._id %>">
+                        <p><%= note.content %></p>
+                        <button class="delete-btn" data-note-id="<%= note._id %>">Delete</button>
+                    </div>
+                    <% }); %>
+                </div>
+                <textarea id="not-urgent-important-input" placeholder="Add a note..."></textarea>
+                <button class="add-btn" onclick="addNote('not-urgent-important')">Add Note</button>
+            </div>
+            <div class="box urgent-not-important">
+                <h2>Urgent & Not Important</h2>
+                <div class="notes-list" id="urgent-not-important-notes">
+                    <% urgentNotImportantNotes.forEach(note => { %>
+                    <div class="note-box" data-note-id="<%= note._id %>">
+                        <p><%= note.content %></p>
+                        <button class="delete-btn" data-note-id="<%= note._id %>">Delete</button>
+                    </div>
+                    <% }); %>
+                </div>
+                <textarea id="urgent-not-important-input" placeholder="Add a note..."></textarea>
+                <button class="add-btn" onclick="addNote('urgent-not-important')">Add Note</button>
+            </div>
+            <div class="box not-urgent-not-important">
+                <h2>Not Urgent & Not Important</h2>
+                <div class="notes-list" id="not-urgent-not-important-notes">
+                    <% notUrgentNotImportantNotes.forEach(note => { %>
+                    <div class="note-box" data-note-id="<%= note._id %>">
+                        <p><%= note.content %></p>
+                        <button class="delete-btn" data-note-id="<%= note._id %>">Delete</button>
+                    </div>
+                    <% }); %>
+                </div>
+                <textarea id="not-urgent-not-important-input" placeholder="Add a note..."></textarea>
+                <button class="add-btn" onclick="addNote('not-urgent-not-important')">Add Note</button>
+            </div>
+        </div>
+    </div>
+    <script src="/js/eisenhower_matrix.js"></script>
+</body>
+</html>

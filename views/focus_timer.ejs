@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Focus Timer</title>
+    <link rel="stylesheet" href="/css/focus_timer.css">
+</head>
+<body>
+    <div class="container">
+        <section class="timer-section">
+            <div class="box">
+                <h1>Focus Timer</h1>
+                <div class="timer-display">
+                    <svg class="progress-ring" width="120" height="120">
+                        <circle class="progress-ring__circle" stroke="blue" stroke-width="4" fill="transparent" r="56" cx="60" cy="60"/>
+                    </svg>
+                    <div class="timer-text">
+                        <span id="hours">00</span>:<span id="minutes">00</span>:<span id="seconds">00</span>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <input type="number" id="hours-input" placeholder="Hours" min="0">
+                    <input type="number" id="minutes-input" placeholder="Minutes" min="0" max="59">
+                    <input type="number" id="seconds-input" placeholder="Seconds" min="0" max="59">
+                </div>
+                <button id="start-timer">Start Timer</button>
+                <button id="stop-timer" style="background-color: red; color: white;">Stop Timer</button>
+                <button id="clear-timer">Clear Timer</button>
+            </div>
+        </section>
+        <section class="checklist-section">
+            <div class="box">
+                <h1>Checklist</h1>
+                <form id="checklist-form">
+                    <input type="text" id="checklist-input" placeholder="Add a new task" required>
+                    <button type="submit">Add</button>
+                </form>
+                <ul id="checklist">
+                    <!-- Checklist items will be added here -->
+                </ul>
+                <button id="clear-list">Clear List</button>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        let timer;
+        let remainingTime = 0;
+        let totalTime = 0;
+
+        const circle = document.querySelector('.progress-ring__circle');
+        const radius = circle.r.baseVal.value;
+        const circumference = 2 * Math.PI * radius;
+
+        
+        circle.style.strokeDasharray = `${circumference} ${circumference}`;
+        circle.style.strokeDashoffset = circumference;
+
+        function setProgress(percent) {
+            const offset = circumference - (percent / 100) * circumference;
+            circle.style.strokeDashoffset = offset;
+        }
+
+        function checkAllTasksCompleted() {
+            const checkboxes = document.querySelectorAll('#checklist input[type="checkbox"]');
+            return Array.from(checkboxes).every(checkbox => checkbox.checked);
+        }
+
+        function showCompletionMessage() {
+            alert("Congratulations on completing the tasks before time!");
+        }
+
+        document.getElementById('start-timer').addEventListener('click', function() {
+            const inputHours = parseInt(document.getElementById('hours-input').value) || 0;
+            const inputMinutes = parseInt(document.getElementById('minutes-input').value) || 0;
+            const inputSeconds = parseInt(document.getElementById('seconds-input').value) || 0;
+
+            totalTime = (inputHours * 3600) + (inputMinutes * 60) + inputSeconds;
+            remainingTime = totalTime;
+
+            if (totalTime <= 0) {
+                alert("Please enter a valid time.");
+                return;
+            }
+
+            clearInterval(timer);
+            updateDisplay(remainingTime);
+            document.getElementById('stop-timer').style.display = 'inline';
+
+            timer = setInterval(() => {
+                remainingTime--;
+                updateDisplay(remainingTime);
+                const percent = (remainingTime / totalTime) * 100;
+                setProgress(percent);
+
+                if (remainingTime <= 0) {
+                    clearInterval(timer);
+                    alert("Time's up!");
+                }
+
+                if (checkAllTasksCompleted()) {
+                    showCompletionMessage();
+                    clearInterval(timer);
+                }
+            }, 1000);
+        });
+
+        document.getElementById('stop-timer').addEventListener('click', function() {
+            clearInterval(timer);
+        });
+
+        document.getElementById('clear-timer').addEventListener('click', function() {
+            clearInterval(timer);
+            remainingTime = 0;
+            updateDisplay(remainingTime);
+            setProgress(100);
+            document.getElementById('hours-input').value = '';
+            document.getElementById('minutes-input').value = '';
+            document.getElementById('seconds-input').value = '';
+        });
+
+        function updateDisplay(seconds) {
+            const hours = Math.floor(seconds / 3600);
+            const minutes = Math.floor((seconds % 3600) / 60);
+            const secs = seconds % 60;
+
+            document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+            document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+            document.getElementById('seconds').textContent = String(secs).padStart(2, '0');
+        }
+
+        // Checklist functionality
+        document.getElementById('checklist-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const input = document.getElementById('checklist-input');
+            const taskText = input.value;
+            addChecklistItem(taskText);
+            input.value = '';
+        });
+
+        function addChecklistItem(taskText) {
+            const li = document.createElement('li');
+            const checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            checkbox.classList.add('large-checkbox');
+            checkbox.addEventListener('change', function() {
+                li.classList.toggle('completed');
+                if (checkAllTasksCompleted() && remainingTime > 0) {
+                    showCompletionMessage();
+                }
+            });
+
+            li.appendChild(checkbox);
+            li.appendChild(document.createTextNode(taskText));
+            document.getElementById('checklist').appendChild(li);
+        }
+
+        document.getElementById('clear-list').addEventListener('click', function() {
+            document.getElementById('checklist').innerHTML = '';
+        });
+    </script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            display: flex;
+            justify-content: space-between;
+            width: 80%;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .box {
+            text-align: center;
+            flex: 1;
+            padding: 20px;
+            margin: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .timer-section, .checklist-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+            padding: 20px;
+        }
+        .timer-display {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            margin: 20px auto;
+        }
+        .timer-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 24px;
+        }
+        .progress-ring__circle {
+            transform: rotate(-90deg);
+            transform-origin: 50% 50%;
+            transition: stroke-dashoffset 0.5s;
+        }
+        .input-group {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        .input-group input {
+            padding: 10px;
+            font-size: 16px;
+            margin: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 70px; /* Ensuring consistent size */
+            text-align: center;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #stop-timer {
+            background-color: red;
+        }
+        #stop-timer:hover {
+            background-color: darkred;
+        }
+        #checklist-form {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        #checklist-input {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            flex: 1;
+        }
+        #checklist-form button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            background-color: #28a745;
+            color: white;
+            cursor: pointer;
+        }
+        #checklist-form button:hover {
+            background-color: #218838;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+            width: 100%;
+        }
+        li {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+        li.completed {
+            text-decoration: line-through;
+            color: gray;
+        }
+        .large-checkbox {
+            width: 20px;
+            height: 20px;
+        }
+        #clear-list {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            background-color: #dc3545;
+            color: white;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        #clear-list:hover {
+            background-color: #c82333;
+        }
+    </style>
+</body>
+</html>
