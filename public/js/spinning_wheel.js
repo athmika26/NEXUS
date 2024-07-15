@@ -106,3 +106,8 @@ spinButton.addEventListener('click', () => {
 });
 
 drawWheel();
+const menuToggle = document.getElementById("menu-toggle");
+menuToggle.addEventListener("click", function () {
+    sidebar.classList.toggle("open");
+});
+

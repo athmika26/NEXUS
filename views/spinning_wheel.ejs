@@ -8,6 +8,68 @@
 </head>
 <body>
     <div class="container">
+        <div class="sidebar collapsed" id="sidebar" aria-label="Main menu">
+            <div class="logo" id="logo">
+              <span><i>Nexus</i></span>
+            </div>
+            <ul>
+              <li class="active">
+                <a href="/home">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                    <path
+                      d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7zm2.85 11.1l-.85.6V16h-4v-2.3l-.85-.6A4.997 4.997 0 0 1 7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.63-.8 3.16-2.15 4.1z">
+                    </path>
+                  </svg>
+                  <span>Notes</span>
+                </a>
+              </li>
+              <li>
+                <a href="/home/archive">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                    <path
+                      d="M20.54 5.23l-1.39-1.68C18.88 3.21 18.47 3 18 3H6c-.47 0-.88.21-1.16.55L3.46 5.23C3.17 5.57 3 6.02 3 6.5V19c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6.5c0-.48-.17-.93-.46-1.27zM6.24 5h11.52l.83 1H5.42l.82-1zM5 19V8h14v11H5zm11-5.5l-4 4-4-4 1.41-1.41L11 13.67V10h2v3.67l1.59-1.59L16 13.5z">
+                    </path>
+                  </svg>
+                  <span>Archive</span>
+                </a>
+              </li>
+              <li>
+                <a href="/home/wheel">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                    <path d="M12 2a1 1 0 011 1v1.07A7.994 7.994 0 0120.93 11H22a1 1 0 110 2h-1.07a7.994 7.994 0 01-7.93 6.93V21a1 1 0 11-2 0v-1.07A7.994 7.994 0 013.07 13H2a1 1 0 110-2h1.07A7.994 7.994 0 0112 4.07V3a1 1 0 011-1zm-1 2.07A6.002 6.002 0 006.07 11H11V4.07zM4.07 13A6.002 6.002 0 0011 19.93V13H4.07zm9.93 6.93A6.002 6.002 0 0017.93 13H13v6.93zM19.93 11A6.002 6.002 0 0013 4.07V11h6.93z"></path>
+                  </svg>
+                  <span>Spin Wheel</span>
+                </a>
+              </li>
+              <li>
+                <a href="/home/matrix">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                    <rect x="3" y="3" width="6" height="6" stroke="black" stroke-width="2" fill="none"></rect>
+                    <rect x="15" y="3" width="6" height="6" stroke="black" stroke-width="2" fill="none"></rect>
+                    <rect x="3" y="15" width="6" height="6" stroke="black" stroke-width="2" fill="none"></rect>
+                    <rect x="15" y="15" width="6" height="6" stroke="black" stroke-width="2" fill="none"></rect>
+                  </svg>
+                  <span>Eisenhower Matrix</span>
+                </a>
+              </li>
+              <li>
+                <a href="/home/focus_timer">
+                  <svg version="1.0" xmlns="http://www.w3.org/2000/svg"  width="24" height="24" viewBox="0 0 300.000000 300.000000"  preserveAspectRatio="xMidYMid meet">  <g transform="translate(0.000000,300.000000) scale(0.050000,-0.050000)" fill="#000000" stroke="none"> <path d="M880 5962 c-648 -176 -936 -879 -608 -1482 100 -184 111 -185 208 -6 275 511 700 896 1254 1137 l148 64 -89 78 c-239 210 -603 294 -913 209z"/> <path d="M4670 5880 c-127 -26 -290 -97 -390 -170 -113 -83 -176 -150 -140 -150 51 0 410 -183 577 -294 314 -209 660 -602 833 -945 l55 -110 49 60 c577 703 -87 1788 -984 1609z"/> <path d="M2750 5388 c-2078 -219 -3068 -2683 -1713 -4261 l148 -172 -323 -323 c-177 -177 -322 -339 -322 -358 0 -95 101 -205 230 -249 59 -20 66 -15 403 320 l343 340 118 -71 c865 -526 1917 -522 2753 11 l96 61 344 -343 c261 -260 355 -343 393 -343 71 0 173 68 209 138 66 128 55 147 -291 494 l-323 323 148 172 c1081 1255 699 3221 -773 3976 -432 222 -991 332 -1440 285z m443 -649 c1623 -181 2327 -2125 1190 -3285 -1094 -1118 -2966 -556 -3287 986 -227 1083 570 2170 1684 2298 214 24 203 24 413 1z"/> <path d="M2881 4445 c-157 -80 -150 -37 -157 -1056 l-6 -909 902 0 c980 0 969 -1 1058 112 82 104 45 301 -72 380 -52 35 -106 38 -701 44 l-645 7 0 631 c0 598 -2 635 -40 697 -74 118 -214 157 -339 94z"/> </g> </svg>  
+                  <span>Focus Timer</span>
+                </a>
+              </li>
+              </li>
+            </ul>
+          </div>
+          <div class="main-content">
+            <div class="header">
+              <button id="menu-toggle">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                  <path d="M4 18h16v-2H4v2zm0-5h16v-2H4v2zm0-7v2h16V6H4z"></path>
+                </svg>
+              </button>
+            </div>
+            </div>
         <h1>Motivational Spinning Wheel</h1>
         <div class="wheel">
             <canvas id="wheelCanvas" class="spinner" width="400" height="400"></canvas>

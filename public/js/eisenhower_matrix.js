@@ -49,3 +49,8 @@ function deleteNote(noteId, category) {
     })
     .catch(error => console.error('Error:', error));
 }
+const menuToggle = document.getElementById("menu-toggle");
+menuToggle.addEventListener("click", function () {
+    sidebar.classList.toggle("open");
+});
+

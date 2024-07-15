@@ -24,3 +24,8 @@ function updateDisplay(time) {
     const displaySeconds = seconds < 10 ? '0' + seconds : seconds;
     document.getElementById('timer-display').textContent = `${displayMinutes}:${displaySeconds}`;
 }
+const menuToggle = document.getElementById("menu-toggle");
+menuToggle.addEventListener("click", function () {
+    sidebar.classList.toggle("open");
+});
+

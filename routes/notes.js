@@ -208,14 +208,9 @@ router.post('/add', authenticateJWT, async (req, res) => {
       console.error(err);
       res.status(500).send('Server Error');
   }
-
-  router.get('/focus_timer', (req, res) => {
-    res.render('focus_timer');
 });
-
 // Route to render the Focus Timer page
 router.get('/focus_timer', (req, res) => {
   res.render('focus_timer'); // Ensure 'focus_timer' is your correct EJS file name
-});
 });
 module.exports = router;

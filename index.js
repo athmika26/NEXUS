@@ -34,8 +34,5 @@ app.get("/login", (req, res) => {
 app.use("/auth", authRoutes);
 app.use("/home", notesRouter);
 
-app.get("/focus_timer", (req, res) => {
-    res.render("focus_timer"); // Renders focus_timer.ejs
-});
 
 app.listen(port, () => console.log(`Server is running on port ${port}`));
