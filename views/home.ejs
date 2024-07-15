@@ -26,26 +26,6 @@
           </a>
         </li>
         <li>
-          <a href="#">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-              <path
-                d="M18 17v-6c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v6H4v2h16v-2h-2zm-2 0H8v-6c0-2.48 1.51-4.5 4-4.5s4 2.02 4 4.5v6zm-4 5c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2z">
-              </path>
-            </svg>
-            <span>Reminders</span>
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-              <path
-                d="M20.41 4.94l-1.35-1.35c-.78-.78-2.05-.78-2.83 0L13.4 6.41 3 16.82V21h4.18l10.46-10.46 2.77-2.77c.79-.78.79-2.05 0-2.83zm-14 14.12L5 19v-1.36l9.82-9.82 1.41 1.41-9.82 9.83z">
-              </path>
-            </svg>
-            <span>Edit Notes</span>
-          </a>
-        </li>
-        <li>
           <a href="/home/archive">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
               <path
@@ -64,7 +44,7 @@
           </a>
         </li>
         <li>
-          <a href="#">
+          <a href="/home/matrix">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
               <rect x="3" y="3" width="6" height="6" stroke="black" stroke-width="2" fill="none"></rect>
               <rect x="15" y="3" width="6" height="6" stroke="black" stroke-width="2" fill="none"></rect>
@@ -74,21 +54,15 @@
             <span>Eisenhower Matrix</span>
           </a>
         </li>
-        
-        
-        <!-- <a href="../frontEnd/Features/spinning_wheel.html" class="nav__link">
-          <i class='bx bx-webcam'></i>
-          <span class="nav__name">Motivational wheel</span>
-        </a> -->
-        <!-- <li>
-          <a href="#">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-              <path d="M15 4V3H9v1H4v2h1v13c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V6h1V4h-5zm2 15H7V6h10v13z"></path>
-              <path d="M9 8h2v9H9zm4 0h2v9h-2z"></path>
-            </svg>
-            <span>Trash</span>
+        <li>
+          <a href="/home/focus_timer">
+            <svg version="1.0" xmlns="http://www.w3.org/2000/svg"  width="24" height="24" viewBox="0 0 300.000000 300.000000"  preserveAspectRatio="xMidYMid meet">  <g transform="translate(0.000000,300.000000) scale(0.050000,-0.050000)" fill="#000000" stroke="none"> <path d="M880 5962 c-648 -176 -936 -879 -608 -1482 100 -184 111 -185 208 -6 275 511 700 896 1254 1137 l148 64 -89 78 c-239 210 -603 294 -913 209z"/> <path d="M4670 5880 c-127 -26 -290 -97 -390 -170 -113 -83 -176 -150 -140 -150 51 0 410 -183 577 -294 314 -209 660 -602 833 -945 l55 -110 49 60 c577 703 -87 1788 -984 1609z"/> <path d="M2750 5388 c-2078 -219 -3068 -2683 -1713 -4261 l148 -172 -323 -323 c-177 -177 -322 -339 -322 -358 0 -95 101 -205 230 -249 59 -20 66 -15 403 320 l343 340 118 -71 c865 -526 1917 -522 2753 11 l96 61 344 -343 c261 -260 355 -343 393 -343 71 0 173 68 209 138 66 128 55 147 -291 494 l-323 323 148 172 c1081 1255 699 3221 -773 3976 -432 222 -991 332 -1440 285z m443 -649 c1623 -181 2327 -2125 1190 -3285 -1094 -1118 -2966 -556 -3287 986 -227 1083 570 2170 1684 2298 214 24 203 24 413 1z"/> <path d="M2881 4445 c-157 -80 -150 -37 -157 -1056 l-6 -909 902 0 c980 0 969 -1 1058 112 82 104 45 301 -72 380 -52 35 -106 38 -701 44 l-645 7 0 631 c0 598 -2 635 -40 697 -74 118 -214 157 -339 94z"/> </g> </svg>  
+            <span>Focus Timer</span>
           </a>
-        </li> -->
+        </li>
+     
+        
+        </li>
       </ul>
     </div>
     <div class="main-content">
@@ -103,6 +77,7 @@
       <div class="note-input">
         <input type="text" id="add-title" placeholder="Take a note...">
         <textarea id="add-content" placeholder="Content"></textarea>
+        <button id="voice-btn">🎤</button>
         <div class="note-actions">
           <button class="add-btn">Add New Note</button>
         </div>
@@ -123,13 +98,11 @@
           <% }); %>
         </div>
       </div>
-      <!-- Add new note button -->
-
       <!-- Modal for editing note -->
       <div id="edit-note-modal" class="modal">
         <div class="modal-content">
           <span class="close">&times;</span>
-          <form>
+          <form id="edit-form">
             <label for="edit-title">Title</label>
             <textarea id="edit-title" name="edit-title"></textarea>
             <label for="edit-content">Content</label>
@@ -139,21 +112,41 @@
         </div>
       </div>
     </div>
+  </div>
 
-    </div>
+  <!-- Your script tags should go at the end of the body for better performance -->
+  <script src="/js/Home_page.js"></script>
+  <script>
+    function handleSearch(query) {
+      console.log("Search Query:", query);
+    }
+    document.addEventListener('DOMContentLoaded', () => {
+      const voiceBtn = document.getElementById('voice-btn');
+      const addContent = document.getElementById('add-content');
 
-    <script src="/js/Home_page.js"></script>
+      if ('webkitSpeechRecognition' in window) {
+        const recognition = new webkitSpeechRecognition();
+        recognition.continuous = false;
+        recognition.interimResults = false;
+        recognition.lang = 'en-US';
 
-    <script>
-      function handleSearch(query) {
-        // This function should handle your search logic
-        // For demonstration purposes, console log the query
-        console.log("Search Query:", query);
-        
-        // You would typically fetch or filter notes based on 'query' and update the UI
-        // Replace this with your actual logic to update the notes list based on search
+        voiceBtn.addEventListener('click', () => {
+          recognition.start();
+        });
+
+        recognition.onresult = (event) => {
+          const transcript = event.results[0][0].transcript;
+          addContent.value = transcript;
+        };
+
+        recognition.onerror = (event) => {
+          console.error('Speech recognition error', event);
+        };
+      } else {
+        alert('Your browser does not support speech recognition. Please try using Google Chrome.');
       }
-    </script>
+    });
+  </script>
 </body>
 
 </html>
