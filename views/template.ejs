@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Note Templates</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="sidebar">
+    <!-- Sidebar content -->
+  </div>
+  <div class="main-content">
+    <header class="header">
+      <button id="menu-toggle" class="menu-button">&#9776;</button>
+      <input type="text" placeholder="Search notes...">
+    </header>
+
+    <div class="container">
+      <h1>Note Templates</h1>
+      <div class="template-buttons">
+        <button class="template-button" onclick="loadTemplate('lecture')">Lecture Notes</button>
+        <button class="template-button" onclick="loadTemplate('research')">Research Notes</button>
+        <button class="template-button" onclick="loadTemplate('default')">Default Notes</button>
+      </div>
+      <div class="note-input" id="note-input">
+        <input type="text" id="note-title" placeholder="Title">
+        <textarea id="note-content" placeholder="Write your note here..."></textarea>
+        <div class="note-actions">
+          <button onclick="saveNote()">Save Note</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="scripts.js"></script>
+</body>
+</html>

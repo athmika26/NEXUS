@@ -102,7 +102,7 @@ h1 {
 /* Sidebar styles */
 .sidebar {
   width: 60px;
-  background: linear-gradient(45deg, #3b8d99, #6b6b83, #aa4b6b);
+  background: #feefc3;
   padding: 0;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
   position: fixed;
@@ -123,7 +123,7 @@ h1 {
   justify-content: center;
   font-size: 24px;
   font-weight: bold;
-  color: #fff;
+  color: #0a91ff;
   margin: 20px auto;
   text-align: center;
   transition: opacity 0.3s ease, width 0.3s ease;
@@ -154,7 +154,7 @@ h1 {
 
 .sidebar ul li a {
   text-decoration: none;
-  color: #fff;
+  color: black;
   display: flex;
   align-items: center;
   padding: 10px 15px;
@@ -185,6 +185,34 @@ h1 {
   opacity: 1;
   width: auto;
   margin-left: 10px;
+}
+
+.menu-toggle {
+  position: absolute;
+  top: 10px;
+  left: 4.5px;
+  z-index: 1000;
+}
+
+.menu-toggle button {
+  border-radius: 50%;
+  display: inline-block;
+  padding: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  height: 48px;
+  width: 48px;
+  background: transparent;
+  border: none;
+  margin: 0;
+}
+
+.menu-toggle button:focus {
+  outline: none;
+}
+
+.menu-toggle svg {
+  fill: currentColor;
 }
 
 .main-content {

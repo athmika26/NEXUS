@@ -1,201 +1,117 @@
-body {
-    font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-    background-color: #f0f0f0;
-}
-
-.timer-container {
-    text-align: center;
-}
-
-h1 {
-    margin-bottom: 20px;
-}
-
-#timer-display {
-    font-size: 2em;
-    margin-top: 20px;
-    background-color: #ffffff;
-    padding: 10px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-input[type="number"],
-button {
-    font-size: 1em;
-    padding: 10px;
-    margin: 5px;
-    border: none;
-    border-radius: 5px;
-    background-color: #007bff;
-    color: #ffffff;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-input[type="number"]:focus,
-button:focus {
-    outline: none;
-}
-
-button:hover {
-    background-color: #0056b3;
-}
-
-input[type="number"] {
-    width: 80px;
-}
-
-button {
-    min-width: 100px;
-}
-
 /* Sidebar styles */
 .sidebar {
-    width: 60px;
-    background: linear-gradient(45deg, #3b8d99, #6b6b83, #aa4b6b);
-    padding: 0;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    transition: width 0.3s ease;
-    overflow: hidden;
+  width: 60px;
+  background: #feefc3;
+  padding: 0;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  transition: width 0.3s ease;
+  overflow: hidden;
 }
-
-.sidebar.open {
+  
+  .sidebar.open {
     width: 250px;
-}
-
-.sidebar .logo {
+  }
+  
+  .sidebar .logo {
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 24px;
     font-weight: bold;
-    color: #fff;
+    color: #0a91ff;
     margin: 20px auto;
     text-align: center;
     transition: opacity 0.3s ease, width 0.3s ease;
-}
-
-.sidebar .logo span {
+  }
+  
+  .sidebar .logo span {
     transition: opacity 0.3s ease, width 0.3s ease;
     opacity: 0;
     width: 0;
     overflow: hidden;
     white-space: nowrap;
-}
-
-.sidebar.open .logo span {
+  }
+  
+  .sidebar.open .logo span {
     opacity: 1;
     width: auto;
     margin-left: 10px;
-}
-
-.sidebar ul {
+  }
+  
+  .sidebar ul {
     list-style-type: none;
     padding: 0;
-}
-
-.sidebar ul li {
+  }
+  
+  .sidebar ul li {
     margin-bottom: 10px;
-}
-
-.sidebar ul li a {
+  }
+  
+  .sidebar ul li a {
     text-decoration: none;
-    color: #fff;
+    color: black;
     display: flex;
     align-items: center;
     padding: 10px 15px;
     border-radius: 4px;
     transition: background-color 0.3s ease;
-}
-
-.sidebar ul li.active a,
-.sidebar ul li a:hover {
+  }
+  
+  .sidebar ul li.active a,
+  .sidebar ul li a:hover {
     background-color: rgba(255, 255, 255, 0.2);
-}
-
-.sidebar ul li a svg {
+  }
+  
+  .sidebar ul li a svg {
     margin-right: 10px;
     flex-shrink: 0;
     transition: margin-right 0.3s ease;
-}
-
-.sidebar ul li a span {
+  }
+  
+  .sidebar ul li a span {
     transition: opacity 0.3s ease, width 0.3s ease;
     opacity: 0;
     width: 0;
     overflow: hidden;
     white-space: nowrap;
-}
-
-.sidebar.open ul li a span {
+  }
+  
+  .sidebar.open ul li a span {
     opacity: 1;
     width: auto;
     margin-left: 10px;
-}
-
-.main-content {
-    flex-grow: 1;
-    margin-left: 60px;
-    padding: 0;
-    transition: margin-left 0.3s ease, width 0.3s ease;
-    width: calc(100% - 60px);
-    overflow: auto;
-}
-
-.main-content .header {
-    padding: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-.main-content .header button {
-    font-size: 24px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: #202124;
-    position: fixed;
+  }
+  
+  .menu-toggle {
+    position: absolute;
     top: 10px;
-    left: 10px;
-}
-
-.main-content .header input[type="text"] {
-    width: calc(100% - 40px);
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 18.8px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-}
-
-.sidebar.open ~ .main-content {
-    margin-left: 250px;
-    width: calc(100% - 250px);
-}
-
-.menu-button {
+    left: 4.5px;
+    z-index: 1000;
+  }
+  
+  .menu-toggle button {
     border-radius: 50%;
     display: inline-block;
-    margin: 0 4px;
     padding: 12px;
     overflow: hidden;
-    vertical-align: middle;
     cursor: pointer;
-    height: 24px;
-    width: 24px;
-    user-select: none;
-    flex: 0 0 auto;
-    color: #5f6368;
-    opacity: 1;
-}
+    height: 48px;
+    width: 48px;
+    background: transparent;
+    border: none;
+    margin: 0;
+    color: black;
+  }
+  
+  
+  .menu-toggle button:focus {
+    outline: none;
+  }
+  
+  .menu-toggle svg {
+    fill: currentColor;
+  }
