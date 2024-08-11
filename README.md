@@ -1,9 +1,8 @@
 
 # Nexus - Productivity Booster
 Nexus is a powerful and user-centric productivity web application designed to maximize your productivity through scientifically proven techniques, tips, and tricks. Whether you're a student, professional, or anyone seeking to boost your efficiency, Nexus is meticulously crafted to help you achieve your goals by enhancing focus, motivation, and overall productivity.
+Built with EJS, CSS, and Node.js, Nexus offers an intuitive and seamless experience, empowering you to take control of your tasks and notes with ease.
 
->Built with EJS, CSS, and Node.js, Nexus offers an intuitive and seamless experience, empowering you to take control of your tasks and notes with ease.
-=======
 # Features
 ## Comprehensive CRUD Operations:
 Nexus allows you to seamlessly manage your notes and tasks with full CRUD (Create, Read, Update, Delete) functionality. Easily add new notes or tasks, edit them as your needs change, and delete or archive them when they're no longer needed. The powerful search feature ensures you can quickly find what you're looking for, even in a large collection of notes.
